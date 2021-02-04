@@ -31,14 +31,41 @@ struct Model {
     current_week_date: NaiveDate
 }
 
+// example seed-rs model for using routing and auth
+// struct Model {
+//     ctx: Context,
+//     base_url: Url,
+//     page: Page,
+// }
+
+// struct Context {
+//     user: Option<User>,
+//     token: Option<String>,
+// }
+
+// struct User {
+//     username: String,
+//     email: String,
+// }
+
+// enum Page {
+//     Home,
+//     ClientsAndProjects(page::clients_and_projects::Model),
+//     TimeTracker(page::time_tracker::Model),
+//     TimeBlocks(page::time_blocks::Model),
+//     Settings(page::settings::Model),
+//     NotFound,
+// }
+
 // ------ ------
 //    Update
 // ------ ------
 
 // (Remove the line below once any of your `Msg` variants doesn't implement `Copy`.)
-#[derive(Copy, Clone)]
+// #[derive(Copy, Clone)]
 // `Msg` describes the different events you can modify state with.
 enum Msg {
+    // UrlChanged(subs::UrlChanged)
     NextWeekTransition,
     PreviousWeekTransition,
 }
