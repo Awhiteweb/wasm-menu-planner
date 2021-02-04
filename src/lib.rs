@@ -64,14 +64,17 @@ fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
 // `view` describes what to display.
 fn view(model: &Model) -> Node<Msg> {
     div![
-        "Next week >>",
-        C!["counter"],
-        button![model, ev(Ev::Click, |_| Msg::NextWeekTransition),],
-    ],
-    div![
-        "Previous week >>",
-        C!["counter"],
-        button![model, ev(Ev::Click, |_| Msg::PreviousWeekTransition),],
+        C!["list-inline"],
+        div![
+            "Previous week <<",
+            C!["counter"],
+            button![model, ev(Ev::Click, |_| Msg::PreviousWeekTransition),],
+        ],
+        div![
+            "Next week >>",
+            C!["counter"],
+            button![model, ev(Ev::Click, |_| Msg::NextWeekTransition),],
+        ]
     ]
 }
 
