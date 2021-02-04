@@ -2,6 +2,7 @@
 //  - it's useful when you want to check your code with `cargo make verify`
 // but some rules are too "annoying" or are not applicable for your case.)
 #![allow(clippy::wildcard_imports)]
+#![allow(unused_imports)]
 
 use seed::{prelude::*, *};
 
@@ -66,7 +67,7 @@ fn view(model: &Model) -> Node<Msg> {
         "Next week >>",
         C!["counter"],
         button![model, ev(Ev::Click, |_| Msg::NextWeekTransition),],
-    ]
+    ],
     div![
         "Previous week >>",
         C!["counter"],
