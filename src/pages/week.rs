@@ -94,26 +94,16 @@ fn view(model: &Model) -> Node<Msg> {
         div![
             model.current_week_title
         ],
-        day_list_view(&model.current_week_days)
+        &model.current_week_days.iter().map(|day| day_view(day)).collect()
     ]
-}
-
-fn day_list_view(days: &Vec<Day>) -> Node<Msg> {
-    // for each day create a new div for each day
-    days.iter()map(day_view).collect()
 }
 
 fn day_view(day: &Day) -> Node<Msg> {
     // create a new div for a day this will contain a title and list of meals
     div![
         day.title,
-        meal_list_view(day.meals)
+        day.meals.iter().map(|_, meal| meal_view(meal)).collect()
     ]
-}
-
-fn meal_list_view(meals: &BTreeMap<MealType, Meal>) -> Node<Msg> {
-    // this div will contain a list of meals divs
-    meals.iter().map(|meal| meal_view).collect()
 }
 
 fn meal_view(meal: &Meal) -> Node<Msg> {
