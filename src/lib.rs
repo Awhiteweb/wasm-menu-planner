@@ -8,7 +8,7 @@ use seed::{prelude::*, *};
 use std::collections::BTreeMap;
 
 use chrono::Duration;
-use chrono::naive::NaiveDate
+use chrono::naive::NaiveDate;
 
 // ------ ------
 //     Init
@@ -28,6 +28,7 @@ fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
 // `Model` describes our app state.
 struct Model {
     current_week_date: NaiveDate
+}
 
 // ------ ------
 //    Update
