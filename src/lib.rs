@@ -11,6 +11,8 @@ use std::collections::BTreeMap;
 use chrono::Duration;
 use chrono::naive::NaiveDate;
 
+const FORMAT: &'static str = "%Y-%m-%d";
+
 // ------ ------
 //     Init
 // ------ ------
@@ -18,8 +20,46 @@ use chrono::naive::NaiveDate;
 // `init` describes what should happen when your app started.
 fn init(url: Url, _: &mut impl Orders<Msg>) -> Model {
     Model {
+        base_url: url.to_base_url(),
+        ctx: Context {
+            user: None.
+            token: None,
+        },
         current_week_date: NaiveDate::from_ymd(2021, 02, 01),
-        base_url: url.to_base_url()
+        current_week_days: mock_week_days(current_week_date),
+    }
+}
+
+fn mock_week_days(week_start: NaiveDate) -> Vec<Day> {
+    let meals = BTreeMap::new();
+    meals.insert(MealType::Lunch, Meal {
+        option: MealType::Lunch,
+        value: "hot dogs"
+    });
+    meals.insert(MealType.Supper, Meal {
+        option: MealType::Supper,
+        value: "chilli"
+    });
+    let mut days: Vec<Day> = Vec::new();
+    for n in 0..7 {
+        days.push(mock_day(week_start + Duration::dats(n)));
+    }
+    days
+}
+
+fn mock_day(title: NaiveDate) -> Day {
+    let meals = BTreeMap::new();
+    meals.insert(MealType::Lunch, Meal {
+        option: MealType::Lunch,
+        value: "hot dogs"
+    });
+    meals.insert(MealType.Supper, Meal {
+        option: MealType::Supper,
+        value: "chilli"
+    });
+    Day {
+        title,
+        meals,
     }
 }
 
@@ -29,35 +69,37 @@ fn init(url: Url, _: &mut impl Orders<Msg>) -> Model {
 
 // `Model` describes our app state.
 struct Model {
+    base_url: Url,
+    ctx: Context,
     current_week_date: NaiveDate,
-    base_url: Url
+    current_week_days: Vec<Day>,
 }
 
-// example seed-rs model for using routing and auth
-// struct Model {
-//     ctx: Context,
-//     base_url: Url,
-//     page: Page,
-// }
+struct Context {
+    user: Option<User>,
+    token: Option<String>,
+}
 
-// struct Context {
-//     user: Option<User>,
-//     token: Option<String>,
-// }
+struct User {
+    username: String,
+    email: String,
+}
 
-// struct User {
-//     username: String,
-//     email: String,
-// }
+struct Day {
+    title: NaiveDate,
+    meals: BTreeMap<MealType, Meal>,
+}
 
-// enum Page {
-//     Home,
-//     ClientsAndProjects(page::clients_and_projects::Model),
-//     TimeTracker(page::time_tracker::Model),
-//     TimeBlocks(page::time_blocks::Model),
-//     Settings(page::settings::Model),
-//     NotFound,
-// }
+struct Meal {
+    option: MealType,
+    value: String,
+}
+
+enum MealType {
+    Breakfast = 0,
+    Lunch = 1,
+    Supper = 2,
+}
 
 // ------ ------
 //    Update
@@ -77,12 +119,17 @@ fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
     match msg {
         Msg::UrlChanged(subs::UrlChanged(url)) => {},
         Msg::NextWeekTransition => {
-            model.current_week_date = model.current_week_date + Duration::days(7)
+            let next_week = model.current_week_date + Duration::days(7);
+
         },
         Msg::PreviousWeekTransition => {
-            model.current_week_date = model.current_week_date - Duration::days(7)
+            let previous_week = model.current_week_date - Duration::days(7);
         },
     }
+}
+
+fn format_day(date: NaiveDate) -> String {
+    format!("{}", date.format(FORMAT))
 }
 
 // ------ ------
