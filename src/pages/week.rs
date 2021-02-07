@@ -91,9 +91,12 @@ fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
 // `view` describes what to display.
 fn view(model: &Model) -> Node<Msg> {
     div![
-        div![
+        C!["card"],
+        h2![
             model.current_week_title
         ],
+    ],
+    div![
         &model.current_week_days.iter().map(|day| day_view(day)).collect()
     ]
 }
@@ -101,13 +104,18 @@ fn view(model: &Model) -> Node<Msg> {
 fn day_view(day: &Day) -> Node<Msg> {
     // create a new div for a day this will contain a title and list of meals
     div![
-        day.title,
+        C!["card"],
+        p![
+            C!["card__name"],
+            day.title
+        ],
         day.meals.iter().map(|_, meal| meal_view(meal)).collect()
     ]
 }
 
 fn meal_view(meal: &Meal) -> Node<Msg> {
     div![
+        C!["draw-border"],
         h3![meal.option],
         p![meal.value]
     ]
