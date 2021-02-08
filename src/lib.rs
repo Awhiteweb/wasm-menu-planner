@@ -19,6 +19,9 @@ const FORMAT: &'static str = "%Y-%m-%d";
 
 // `init` describes what should happen when your app started.
 fn init(url: Url, _: &mut impl Orders<Msg>) -> Model {
+    // orders
+    //     .subscribe(Msg::UrlChanged)
+    //     .notify(subs::UrlChanged(url));
     Model {
         base_url: url.to_base_url(),
         ctx: Context {
@@ -109,21 +112,23 @@ enum MealType {
 // #[derive(Copy, Clone)]
 // `Msg` describes the different events you can modify state with.
 enum Msg {
-    UrlChanged(subs::UrlChanged),
+    // UrlChanged(subs::UrlChanged),
     NextWeekTransition,
     PreviousWeekTransition,
 }
 
 // `update` describes how to handle each `Msg`.
 fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
+    let days = &model.current_week_days;
     match msg {
-        Msg::UrlChanged(subs::UrlChanged(url)) => {},
+        // Msg::UrlChanged(subs::UrlChanged(url)) => {},
         Msg::NextWeekTransition => {
             let next_week = model.current_week_date + Duration::days(7);
-
+            days = mock_week_days(next_week);
         },
         Msg::PreviousWeekTransition => {
             let previous_week = model.current_week_date - Duration::days(7);
+            days = mock_week_days(previous_week);
         },
     }
 }
