@@ -9,13 +9,22 @@
 </head>
 
 <body class="home" id="page">
-   <div class="container title">
+   <div class="container content">
+      <section id="app"></section>
+   </div>
+
+   <!-- Scripts -->
+   <script type="module">
+      import init from '/pkg/package.js';
+      init('/pkg/package_bg.wasm');
+   </script>
+   <!-- <div class="container title">
       <button class="btn draw-border"><i class="fa fa-prev">prev</i></button>
       <h2>Week 2021-02-01</h2>
       <button class="btn draw-border"><i class="fa fa-next">next</i></button>
-   </div>
-   <div class="container content">
-      <div class="card">
+   </div> -->
+   <!-- <div class="container content"> -->
+      <!-- <div class="card">
          <div class="day-contents">
             <p class="card__name">Monday 1st Feb</p>
             <div class="meal">
@@ -105,7 +114,7 @@
                <p>bean chilli</p>
             </div>
          </div>
-      </div>
+      </div> -->
       <!-- <div class="card">
          <img
             src="https://lh3.googleusercontent.com/pZwZJ5HIL5iKbA91UGMUIPR0VJWa3K0vOGzDZmY6wU3EJBUdfsby3VEyxU162XxTyOyP3D154tjkr-4Jgcx8lygYUR8eB-jVmld4dsHi1c-mE_A8jKccseAG7bdEwVrcuuk6ciNtSw=s170-no"
@@ -131,17 +140,7 @@
          <button class="btn draw-border">Follow</button>
          <button class="btn draw-border">Message</button>
       </div> -->
-   </div>
-
-   <div class="container">
-      <section id="app"></section>
-   </div>
-
-   <!-- Scripts -->
-   <script type="module">
-      import init from '/pkg/package.js';
-      init('/pkg/package_bg.wasm');
-   </script>
+   <!-- </div> -->
 </body>
 
 </html>

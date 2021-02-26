@@ -4,6 +4,10 @@
     background-color: #f5f5f5;
 }
 
+#app {
+  width: 100%;
+}
+
 .container {
   display: grid;
   flex-wrap: wrap;
@@ -19,8 +23,15 @@
     /* height: 100vh; */
 }
 
-.title {
-    display: inline-block;
+.menu-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.menu-body {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .day-contents {
@@ -29,8 +40,10 @@
 }
 
 .meal {
-    padding: 0 15px 15px;
+    padding: 0 15px;
+    border-top: #58afd1 4px solid;
 }
+
 
 .card {
     margin: 0 12.5px 25px;
@@ -47,10 +60,18 @@
     color: white;
 }
 
+.meal-list {
+  width: 100%;
+}
+
 .card__name {
   margin-top: 15px;
   font-size: 1.5em;
   text-align: center;
+}
+
+.today .card__name {
+  border-bottom: #eb196e 4px solid;
 }
 
 .card__image {
@@ -61,10 +82,20 @@
   margin-top: 20px;
   box-shadow: 0 10px 50px rgba(235, 25, 110, 1);
 }
+.item {
+  padding-top: 2em;
+}
+
+a.btn {
+  color: inherit;
+}
+
+a.btn, a.btn:hover, a.btn:active {
+  text-decoration: none;
+}
 
 .draw-border {
   box-shadow: inset 0 0 0 4px #58cdd1;
-  color: #58afd1;
   -webkit-transition: color 0.25s 0.0833333333s;
   transition: color 0.25s 0.0833333333s;
   position: relative;
@@ -94,7 +125,7 @@
 }
 
 .draw-border:hover {
-  color: #ffe593;
+  color: #58afd1;
 }
 
 .draw-border:hover::before,
@@ -114,6 +145,18 @@
 .draw-border:hover::after {
   -webkit-transition-delay: 0s, 0.25s, 0s;
   transition-delay: 0s, 0.25s, 0s;
+}
+
+.item.title {
+  background: none;
+  border: none;
+  line-height: 1.5;
+  font: 700 1.2rem 'Roboto Slab', sans-serif;
+  padding: 0.75em 2em;
+  letter-spacing: 0.05rem;
+  margin: 1em;
+  width: 13rem;
+  text-align: center;
 }
 
 .btn {

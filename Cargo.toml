@@ -16,7 +16,14 @@ wasm-bindgen-test = "0.3.18"
 
 [dependencies]
 seed = "0.8.0"
-chrono = "0.4.0"
+regex = "1"
+lazy_static = "1.4.0"
+stdweb = "0.4.20"
+cynic = "0.12.1"
+
+[dependencies.chrono]
+version = "0.4"
+features = ["serde", "wasmbind"]
 
 [profile.release]
 lto = true
