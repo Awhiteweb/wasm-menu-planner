@@ -20,3 +20,16 @@ jobs:
       run: cargo build
     - name: Run tests
       run: cargo test --verbose
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-1
+    - name: Publish
+      run: cargo make build_release
+    - name: Deploy pkg files
+      run: aws s3 cp pkg s3://whiteslife-menu-planner-website --recursive --acl public-read
+    - name: Deploy index.html
+      run: aws s3 cp index.html s3://whiteslife-menu-planner-website --acl public-read
+

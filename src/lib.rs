@@ -34,7 +34,7 @@ fn log(value: String) {
 // ------ ------
 
 // `init` describes what should happen when your app started.
-fn init(mut url: Url, orders: &mut impl Orders<Msg>) -> Model {
+fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
     log(format!("{}", &url));
     orders.subscribe(Msg::UrlChanged);
     let today = get_today();
