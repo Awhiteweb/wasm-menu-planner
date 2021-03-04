@@ -30,8 +30,10 @@ jobs:
         aws-region: eu-west-1
     - name: Publish
       run: cargo make build_release
+    - name: Deploy css files
+      run: aws s3 cp css s3://whiteslife-menu-planner-website/ --recursive --acl public-read
     - name: Deploy pkg files
-      run: aws s3 cp pkg s3://whiteslife-menu-planner-website --recursive --acl public-read
+      run: aws s3 cp pkg s3://whiteslife-menu-planner-website/ --recursive --acl public-read
     - name: Deploy index.html
-      run: aws s3 cp index.html s3://whiteslife-menu-planner-website --acl public-read
+      run: aws s3 cp index.html s3://whiteslife-menu-planner-website/ --acl public-read
 
