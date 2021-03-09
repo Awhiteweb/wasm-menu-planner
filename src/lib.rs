@@ -167,22 +167,6 @@ impl Model {
     }
 }
 
-// fn date_from_url_hash(mut url: Url) -> NaiveDate {
-//     let hash = url.remaining_hash_path_parts();
-//     let ymd_opt = match hash.len() {
-//         1 => week_regex_tester(hash[0]),
-//         _ => None
-//     };
-//     let matched_date = match ymd_opt {
-//         Some(v) => {
-//             let naive = NaiveDate::parse_from_str(v, FORMAT).unwrap();
-//             Local::from_local_date(&Local, &naive).unwrap()
-//         },
-//         None => Local::today(),
-//     };
-//     set_start_of_week(matched_date)
-// }
-
 /// tests if the input slice is a valid ymd date format
 fn week_regex_tester<'a>(input: &'a str) -> Option<&'a str> {
     lazy_static! {
@@ -326,11 +310,5 @@ fn view_meal(meal: &Meal) -> Node<Msg> {
 // (This function is invoked by `init` function in `index.html`.)
 #[wasm_bindgen(start)]
 pub fn start() {
-    // console_error_panic_hook::set_once();
-    // let root_element = document()
-    //     .get_element_by_id("app")
-    //     .item(0)
-    //     .expect("element with id 'app'");
-    // Mount the `app` to the element with the `id` "app".
     App::start("app", init, update, view);
 }

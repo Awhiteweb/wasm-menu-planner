@@ -1,0 +1,160 @@
+input WeekDayInsertInput {
+  meals: [WeekDayMealInsertInput]
+  title: String
+}
+
+input WeekDayMealInsertInput {
+  option: String
+  value: String
+}
+
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+
+input WeekQueryInput {
+  title_gte: String
+  title_lt: String
+  _id_lte: ObjectId
+  _id_gte: ObjectId
+  _id_lt: ObjectId
+  _id: ObjectId
+  title_ne: String
+  title: String
+  title_exists: Boolean
+  title_gt: String
+  _id_exists: Boolean
+  _id_nin: [ObjectId]
+  days_nin: [WeekDayQueryInput]
+  AND: [WeekQueryInput!]
+  title_in: [String]
+  _id_ne: ObjectId
+  days_in: [WeekDayQueryInput]
+  _id_gt: ObjectId
+  days: [WeekDayQueryInput]
+  title_nin: [String]
+  title_lte: String
+  OR: [WeekQueryInput!]
+  days_exists: Boolean
+  _id_in: [ObjectId]
+}
+
+type Week {
+  _id: ObjectId
+  days: [WeekDay]
+  title: String
+}
+
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+
+type WeekDay {
+  meals: [WeekDayMeal]
+  title: String
+}
+
+input WeekDayUpdateInput {
+  title: String
+  title_unset: Boolean
+  meals: [WeekDayMealUpdateInput]
+  meals_unset: Boolean
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+
+type Mutation {
+  deleteManyWeeks(query: WeekQueryInput): DeleteManyPayload
+  deleteOneWeek(query: WeekQueryInput!): Week
+  insertManyWeeks(data: [WeekInsertInput!]!): InsertManyPayload
+  insertOneWeek(data: WeekInsertInput!): Week
+  replaceOneWeek(data: WeekInsertInput!, query: WeekQueryInput): Week
+  updateManyWeeks(set: WeekUpdateInput!, query: WeekQueryInput): UpdateManyPayload
+  updateOneWeek(query: WeekQueryInput, set: WeekUpdateInput!): Week
+  upsertOneWeek(query: WeekQueryInput, data: WeekInsertInput!): Week
+}
+
+input WeekDayMealUpdateInput {
+  value: String
+  value_unset: Boolean
+  option: String
+  option_unset: Boolean
+}
+
+input WeekDayQueryInput {
+  meals: [WeekDayMealQueryInput]
+  title_ne: String
+  title_in: [String]
+  title_nin: [String]
+  title_lt: String
+  title_exists: Boolean
+  meals_exists: Boolean
+  title_lte: String
+  title_gte: String
+  AND: [WeekDayQueryInput!]
+  meals_in: [WeekDayMealQueryInput]
+  title: String
+  OR: [WeekDayQueryInput!]
+  title_gt: String
+  meals_nin: [WeekDayMealQueryInput]
+}
+
+input WeekDayMealQueryInput {
+  value_nin: [String]
+  option: String
+  value_exists: Boolean
+  option_lte: String
+  value_lt: String
+  option_nin: [String]
+  option_exists: Boolean
+  value_in: [String]
+  value_lte: String
+  value_gte: String
+  OR: [WeekDayMealQueryInput!]
+  value_ne: String
+  option_gte: String
+  option_lt: String
+  option_gt: String
+  option_in: [String]
+  value: String
+  value_gt: String
+  AND: [WeekDayMealQueryInput!]
+  option_ne: String
+}
+
+type Query {
+  week(query: WeekQueryInput): Week
+  weeks(query: WeekQueryInput, limit: Int = 100, sortBy: WeekSortByInput): [Week]!
+}
+
+type WeekDayMeal {
+  option: String
+  value: String
+}
+
+scalar ObjectId
+
+enum WeekSortByInput {
+  _ID_ASC
+  _ID_DESC
+  TITLE_ASC
+  TITLE_DESC
+}
+
+input WeekInsertInput {
+  _id: ObjectId
+  days: [WeekDayInsertInput]
+  title: String
+}
+
+input WeekUpdateInput {
+  title_unset: Boolean
+  _id: ObjectId
+  _id_unset: Boolean
+  days: [WeekDayUpdateInput]
+  days_unset: Boolean
+  title: String
+}
